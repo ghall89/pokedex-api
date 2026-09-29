@@ -13,16 +13,32 @@ public static class PokemonSpeciesEndpoints
     {
         var group = app.MapGroup("/species");
 
-        group.MapGet("/", async (PokedexDbContext db, HttpContext httpContext) =>
-        {
-            var species = await db.PokemonSpecies.ToListAsync();
+        group.MapGet("/", async (
+            PokedexDbContext db,
+            HttpContext httpContext,
+            int page = 1,
+            int pageSize = 20
+        ) => {
+            var totalCount = await db.PokemonSpecies.CountAsync();
+            var species = await db.PokemonSpecies
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
 
             foreach (var s in species)
             {
                 s.Url = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/species/{s.Id}";
             }
 
-            return Results.Ok(species);
+            return Results.Ok(new
+                {
+                    page,
+                    pageSize,
+                    totalCount,
+                    totalPages = (int)Math.Ceiling(totalCount / (double)pageSize),
+                    items = species,
+                }
+            );
         });
 
         group.MapGet("/{id}", async (int id, PokedexDbContext db) => {
