@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Server.Models;
 
@@ -67,6 +68,10 @@ public class PokemonSpecies
     [ForeignKey("SpeciesId")]
     public ICollection<PokemonSpeciesFlavorText> FlavorTexts { get; set; } = [];
 
+    [ForeignKey("SpeciesId")]
+    public ICollection<Pokemon> Stats { get; set; } = null!;
+
     [NotMapped]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Url { get; set; }
 }

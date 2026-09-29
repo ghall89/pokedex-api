@@ -47,6 +47,7 @@ public static class PokemonSpeciesEndpoints
                 .Include(s => s.Color)
                 .Include(s => s.Shape)
                 .Include(s => s.Habitat)
+                .Include(s => s.Stats)
                 .Include(s => s.FlavorTexts.Where(ft => ft.LanguageId == EnglishLanguageId))
                 .FirstOrDefaultAsync(s => s.Id == id);
             if (species is null) return Results.NotFound();
