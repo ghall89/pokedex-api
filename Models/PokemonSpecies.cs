@@ -58,4 +58,15 @@ public class PokemonSpecies
 
     [Column("conquest_order")]
     public int? ConquestOrder { get; set; }
+
+    public PokemonSpecies? EvolvesFromSpecies { get; set; }
+    public PokemonColor Color { get; set; } = null!;
+    public PokemonShape Shape { get; set; } = null!;
+    public PokemonHabitat? Habitat { get; set; }
+
+    [ForeignKey("SpeciesId")]
+    public ICollection<PokemonSpeciesFlavorText> FlavorTexts { get; set; } = [];
+
+    [NotMapped]
+    public string? Url { get; set; }
 }
