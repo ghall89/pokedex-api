@@ -1,0 +1,14 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - pokedex-data:/data
+    environment:
+      - ConnectionStrings__Pokedex=Data Source=/data/pokedex.sqlite
+
+volumes:
+  pokedex-data:

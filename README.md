@@ -24,9 +24,19 @@ src/Pokedex.Domain/                       Data/domain layer
 
 ## Running it
 
+Locally, with the .NET SDK:
+
 ```
 dotnet run --project src/Pokedex.API/Pokedex.API.csproj
 ```
+
+With Docker:
+
+```
+docker compose up --build
+```
+
+Serves on `http://localhost:8080`. Pokémon data lives in a named volume, seeded on first run; `docker compose down -v` wipes it.
 
 ## Endpoints
 
