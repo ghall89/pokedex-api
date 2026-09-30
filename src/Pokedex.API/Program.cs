@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Server.Data;
-using Server.Endpoints;
+using Pokedex.Domain.Data;
+using Pokedex.API.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 

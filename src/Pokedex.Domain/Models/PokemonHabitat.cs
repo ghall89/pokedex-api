@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Server.Models;
+namespace Pokedex.Domain.Models;
 
 [Table("pokemon_habitats")]
 public class PokemonHabitat

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Server.Data;
-using Server.Extensions;
+using Pokedex.Domain.Data;
+using Pokedex.Domain.Extensions;
 
-namespace Server.Endpoints;
+namespace Pokedex.API.Endpoints;
 
 public static class PokemonSpeciesEndpoints
 {

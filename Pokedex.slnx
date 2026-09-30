@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Pokedex.API/Pokedex.API.csproj" />
+    <Project Path="src/Pokedex.Domain/Pokedex.Domain.csproj" />
+  </Folder>
+</Solution>

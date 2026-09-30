@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace Server.Models;
+namespace Pokedex.Domain.Models;
 
 [Table("pokemon_species")]
 public class PokemonSpecies : IHasUrl

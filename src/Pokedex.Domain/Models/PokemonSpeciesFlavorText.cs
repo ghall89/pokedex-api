@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace Server.Models;
+namespace Pokedex.Domain.Models;
 
 [Table("pokemon_species_flavor_text")]
 [PrimaryKey(nameof(SpeciesId), nameof(VersionId), nameof(LanguageId))]

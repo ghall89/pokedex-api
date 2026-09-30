@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Server.Models;
+using Pokedex.Domain.Models;
 
-namespace Server.Data;
+namespace Pokedex.Domain.Data;
 
 public class PokedexDbContext : DbContext
 {

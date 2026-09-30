@@ -1,6 +1,6 @@
-﻿using Server.Models;
+﻿using Pokedex.Domain.Models;
 
-namespace Server.Extensions;
+namespace Pokedex.Domain.Extensions;
 
 public static class EnumerableExtensions
 {

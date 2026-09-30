@@ -1,4 +1,4 @@
-﻿namespace Server.Models;
+﻿namespace Pokedex.Domain.Models;
 
 public interface IHasUrl
 {
