@@ -11,27 +11,31 @@ A basic HTTP server built in C# / ASP.NET Core, backed by a SQLite database. Thi
 ## Project structure
 
 ```
-Program.cs                          Entry point: DI registration, endpoint wiring
-Data/PokedexDbContext.cs            EF Core DbContext
-Endpoints/                          Route groups, one file per resource
-Models/                             Entity classes mapped to SQLite tables
-appsettings.json                    Config, including the SQLite connection string
+src/Pokedex.API/                          API layer
+  Program.cs                              Entry point: DI registration, endpoint wiring
+  Endpoints/                               Route groups, one file per resource
+  appsettings.json                        Config, including the SQLite connection string
+src/Pokedex.Domain/                       Data/domain layer
+  Data/PokedexDbContext.cs                EF Core DbContext
+  Models/                                 Entity classes mapped to SQLite tables
+  Interfaces/                             Shared entity contracts (e.g. IHasUrl)
+  Extensions/                             Query/shaping helpers (e.g. IEnumerable extensions)
 ```
 
 ## Running it
 
 ```
-dotnet run
+dotnet run --project src/Pokedex.API/Pokedex.API.csproj
 ```
 
 ## Endpoints
 
-| Method | Route           | Description                   |
-| ------ | --------------- | ----------------------------- |
-| GET    | `/`             | Health check placeholder      |
-| GET    | `/health`       | Health check                  |
-| GET    | `/species`      | List all Pokémon species      |
-| GET    | `/species/{id}` | Get one Pokémon species by id |
+| Method | Route           | Description                                                                                          |
+| ------ | --------------- | ---------------------------------------------------------------------------------------------------- |
+| GET    | `/`             | Health check placeholder                                                                             |
+| GET    | `/health`       | Health check                                                                                         |
+| GET    | `/species`      | List Pokémon species, paginated (`page`, `pageSize` query params, default 1/20)                      |
+| GET    | `/species/{id}` | Get one Pokémon species by id, with evolution, color, shape, habitat, stats, and English flavor text |
 
 ## Data model
 
