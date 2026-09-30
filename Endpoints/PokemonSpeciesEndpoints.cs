@@ -1,6 +1,6 @@
+﻿using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Extensions;
-using Microsoft.EntityFrameworkCore;
 
 namespace Server.Endpoints;
 
@@ -19,7 +19,8 @@ public static class PokemonSpeciesEndpoints
             HttpContext httpContext,
             int page = 1,
             int pageSize = 20
-        ) => {
+        ) =>
+        {
             var totalCount = await db.PokemonSpecies.CountAsync();
             var species = await db.PokemonSpecies
                 .Skip((page - 1) * pageSize)
@@ -29,17 +30,18 @@ public static class PokemonSpeciesEndpoints
             var baseUrl = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/species";
 
             return Results.Ok(new
-                {
-                    page,
-                    pageSize,
-                    totalCount,
-                    totalPages = (int)Math.Ceiling(totalCount / (double)pageSize),
-                    items = species.WithUrls(baseUrl),
-                }
+            {
+                page,
+                pageSize,
+                totalCount,
+                totalPages = (int)Math.Ceiling(totalCount / (double)pageSize),
+                items = species.WithUrls(baseUrl),
+            }
             );
         });
 
-        group.MapGet("/{id}", async (int id, PokedexDbContext db) => {
+        group.MapGet("/{id}", async (int id, PokedexDbContext db) =>
+        {
             var species = await db.PokemonSpecies
                 .Include(s => s.EvolvesFromSpecies)
                 .Include(s => s.Color)
