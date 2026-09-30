@@ -1,4 +1,5 @@
 using Server.Data;
+using Server.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Server.Endpoints;
@@ -25,10 +26,7 @@ public static class PokemonSpeciesEndpoints
                 .Take(pageSize)
                 .ToListAsync();
 
-            foreach (var s in species)
-            {
-                s.Url = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/species/{s.Id}";
-            }
+            var baseUrl = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/species";
 
             return Results.Ok(new
                 {
@@ -36,7 +34,7 @@ public static class PokemonSpeciesEndpoints
                     pageSize,
                     totalCount,
                     totalPages = (int)Math.Ceiling(totalCount / (double)pageSize),
-                    items = species,
+                    items = species.WithUrls(baseUrl),
                 }
             );
         });

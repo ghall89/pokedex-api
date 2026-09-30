@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace Server.Models;
 
 [Table("pokemon_species")]
-public class PokemonSpecies
+public class PokemonSpecies : IHasUrl
 {
     [Column("id")]
     public int Id { get; set; }
