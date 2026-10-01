@@ -6,10 +6,6 @@ namespace Pokedex.API.Endpoints;
 
 public static class PokemonSpeciesEndpoints
 {
-    // hardcoded language id
-    // will replace when Language model is built out
-    private const int EnglishLanguageId = 9;
-
     public static void MapPokemonSpeciesEndpoints(this WebApplication app)
     {
         var group = app.MapGroup("/species");
@@ -40,7 +36,7 @@ public static class PokemonSpeciesEndpoints
             );
         });
 
-        group.MapGet("/{id}", async (int id, PokedexDbContext db) =>
+        group.MapGet("/{id}", async (int id, PokedexDbContext db, int languageId = 9) =>
         {
             var species = await db.PokemonSpecies
                 .Include(s => s.EvolvesFromSpecies)
@@ -48,7 +44,7 @@ public static class PokemonSpeciesEndpoints
                 .Include(s => s.Shape)
                 .Include(s => s.Habitat)
                 .Include(s => s.Stats)
-                .Include(s => s.FlavorTexts.Where(ft => ft.LanguageId == EnglishLanguageId))
+                .Include(s => s.FlavorTexts.Where(ft => ft.LanguageId == languageId))
                 .FirstOrDefaultAsync(s => s.Id == id);
             if (species is null) return Results.NotFound();
             return Results.Ok(species);
