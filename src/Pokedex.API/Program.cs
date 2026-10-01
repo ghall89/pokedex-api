@@ -9,10 +9,22 @@ builder.Services.AddDbContext<PokedexDbContext>(options =>
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
-
 app.MapGet("/health", () => new { success = true });
 
 app.MapPokemonSpeciesEndpoints();
+
+app.MapGet("/", (EndpointDataSource endpointDataSource) => {
+    var endpoints = endpointDataSource.Endpoints
+        .OfType<RouteEndpoint>()
+        .Select(e => new {
+            Route = "/" + e.RoutePattern.RawText?.TrimStart('/'),
+            Methods = e.Metadata.GetMetadata<HttpMethodMetadata>()?.HttpMethods,
+            Name = e.DisplayName
+        })
+        .Where(e => e.Route != "/" && e.Route != "//")
+        .OrderBy(e => e.Route);
+
+    return Results.Ok(endpoints);
+});
 
 app.Run();
