@@ -42,7 +42,7 @@ Serves on `http://localhost:8080`. Pokémon data lives in a named volume, seeded
 
 | Method | Route           | Description                                                                                          |
 | ------ | --------------- | ---------------------------------------------------------------------------------------------------- |
-| GET    | `/`             | Health check placeholder                                                                             |
+| GET    | `/`             | List all routes and thier methods                                                                    |
 | GET    | `/health`       | Health check                                                                                         |
 | GET    | `/species`      | List Pokémon species, paginated (`page`, `pageSize` query params, default 1/20)                      |
 | GET    | `/species/{id}` | Get one Pokémon species by id, with evolution, color, shape, habitat, stats, and English flavor text |
